@@ -32,6 +32,9 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<AppUser> appUser=userRepository.findByUserName(username);
+		if(!appUser.isPresent()) {
+			throw new CustomException("User with this username not registered.");
+		}
 		List<GrantedAuthority> authorities=new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(appUser.get().getUserRole()));
 		return new User(appUser.get().getUserName(), appUser.get().getPassword(),authorities);

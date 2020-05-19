@@ -51,7 +51,7 @@ public class UserController {
 			authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(appUser.getUserName(),appUser.getPassword(),Collections.emptyList()));
 			
 		} catch (BadCredentialsException e) {
-			throw new CustomException("Bad Credentials,Invalid Username or Password.");
+			throw new CustomException("Bad Credentials,Invalid Password.");
 		}
 //		final UserDetails userDetails=customUserDetailsService.loadUserByUsername(appUser.getUserName());
 		final UserDetails userDetails=(User) authentication.getPrincipal();
