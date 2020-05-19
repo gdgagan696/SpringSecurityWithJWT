@@ -69,30 +69,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 		}
 	}
 	
-	public AppUser updateUserInfo(String userName,Map<String, String> userInfo) throws UsernameNotFoundException {
-		Optional<AppUser> loggedInUser=userRepository.findByUserName(userName);
-		if(loggedInUser.isPresent()) {
-			String firstName=userInfo.get("firstName");
-			String lastName=userInfo.get("lastName");
-			String regNo=userInfo.get("regNo");
-			String email=userInfo.get("email");
-			String userRole=userInfo.get("roles");
-			String newUserName=userInfo.get("userName");
-			validateInfo(firstName,regNo,email,newUserName,userRole);
-			loggedInUser.get().setFirstName(firstName);
-			loggedInUser.get().setLastName(lastName);
-			loggedInUser.get().setRegNo(regNo);
-			loggedInUser.get().setEmail(email);
-			loggedInUser.get().setUserRole(userRole);
-			loggedInUser.get().setUserName(newUserName);
-			AppUser updatedUser=userRepository.save(loggedInUser.get());
-			return updatedUser;
-		}
-		else {
-			throw new CustomException("Invalid User,User does not exists.");
-		}
-	}
-	
 	private void validateUser(AppUser user) {
 		if(Objects.isNull(user)) {
 			throw new CustomException("User can not be empty.");
@@ -113,24 +89,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 			throw new CustomException("User password can not be empty.");
 		}
 		if(Objects.isNull(user.getUserRole())) {
-			throw new CustomException("User role can not be empty.");
-		}
-	}
-
-	private void validateInfo(String firstName,String regNo,String email,String userName,String userRole) {
-		if(Objects.isNull(firstName)) {
-			throw new CustomException("User first name can not be empty.");
-		}
-		if(Objects.isNull(regNo)) {
-			throw new CustomException("User reg number can not be empty.");
-		}
-		if(Objects.isNull(email)) {
-			throw new CustomException("User email can not be empty.");
-		}
-		if(Objects.isNull(userName)) {
-			throw new CustomException("Username can not be empty.");
-		}
-		if(Objects.isNull(userRole)) {
 			throw new CustomException("User role can not be empty.");
 		}
 	}

@@ -82,11 +82,5 @@ public class UserController {
 		return new ResponseEntity<>(new ResponseDto(msg),HttpStatus.OK);
 	}
 	
-	@PutMapping("/updateInfo")
-	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<AppUser> updateInfo(@AuthenticationPrincipal Principal principal,@RequestBody(required = true) Map<String, String> userInfo) throws CustomException{
-		return new ResponseEntity<>(customUserDetailsService.updateUserInfo(principal.getName(), userInfo),HttpStatus.OK);
-	}
-	
 	
 }
