@@ -18,7 +18,7 @@ Open postman and go to following endpoints:
 
 3)http://localhost:8020/users/getUser for getting existing user info.Pass JWT token in authorization header.
 
-![alt text](./Screenshots/GetUser.PNG?raw=true "User Info
+![alt text](./Screenshots/GetUser.PNG?raw=true "User Info")
 
 
 4)http://localhost:8020/users/getUser for getting existing user info.If JWT not passed then error will be thrown.
